@@ -22,8 +22,8 @@ The following is automated by using curses.wrapper:
 
 class ScreenApp():
 
-    def __init__(self, stdscreen):
-        self.screen = stdscreen
+    def __init__(self, stdscr):
+        self.screen = stdscr
         curses.curs_set(0)
 
         self.screen.addstr("1.) Say Hello\n")
@@ -32,13 +32,16 @@ class ScreenApp():
         self.screen.refresh()
         #time.sleep(2)
 
-        # keep running until (q) for quit is pressed
+        # keep looking for input until (q) for quit is pressed
         while True:
-            screen_input = stdscreen.getch()
+            screen_input = stdscr.getch()
             if screen_input == ord('q'):
                 break
             elif screen_input == ord('2'):
-                self.screen.addstr("Goodbye!!!!!!!!!")
+                height, width = stdscr.getmaxyx()
+                new_height = (height/2) - 1
+                new_width = (width/2) - 1
+                self.screen.addstr(new_height, new_width, "Goodbye!!!!!!!!!")
                 self.screen.refresh()
                 time.sleep(3)
                 break
