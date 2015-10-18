@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 import urwid
+import copy
 
 # urwid Menu Example
 # Reference: http://urwid.readthedocs.org/en/latest/tutorial/
@@ -20,16 +21,21 @@ def menu(title, choices):
     # class urwid.ListBox(body)
     #  body (ListWalker) – a ListWalker subclass such as SimpleFocusListWalker that contains widgets
     #  to be displayed inside the list box
-    return urwid.ListBox(urwid.SimpleFocusListWalker(body))
+    menu_list_box = urwid.ListBox(urwid.SimpleFocusListWalker(body))
+    return menu_list_box
 
 # ------------------------------------------------------------------------------------------------------------------#
 # menu_item_chosen() replaces the menu displayed with text indicating the users’ choice
 def menu_item_chosen(button_label, choice):
     response = urwid.Text([u'You chose ', choice, u'\n'])
+    # added go back button
     go_back_label = urwid.Button(u'Go back')
-    urwid.connect_signal(go_back_label, 'click', 'test')
+    # when go_back_label button clicked, have it go back to the main menu
+    # ERROR: TypeError: 'ListBox' object is not callable
+    urwid.connect_signal(go_back_label, 'click', exit_program)
     done_label = urwid.Button(u'Ok')
     urwid.connect_signal(done_label, 'click', exit_program)
+    # added urwid.AttrMap for go_back_label button
     main_padding.original_widget = urwid.Filler(urwid.Pile([response,
                                                             urwid.AttrMap(go_back_label, None, focus_map='reversed'),
                                                             urwid.AttrMap(done_label, None, focus_map='reversed')]))
