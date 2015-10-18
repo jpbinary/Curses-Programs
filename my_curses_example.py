@@ -26,9 +26,10 @@ class ScreenApp():
         self.screen = stdscr
         curses.curs_set(0)
 
-        self.screen.addstr("1.) Say Hello\n")
-        self.screen.refresh()
-        self.screen.addstr("2.) Say Goodbye\n")
+        # addstr(height (line number), width (characters), text)
+        self.screen.addstr(0, 4, "1.) Say Hello\n")
+        self.screen.addstr(1, 4, "2.) Say Goodbye\n")
+        self.screen.addstr(3, 4, "q.) to quit\n")
         self.screen.refresh()
         #time.sleep(2)
 
