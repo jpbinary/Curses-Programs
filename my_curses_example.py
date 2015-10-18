@@ -20,7 +20,7 @@ The following is automated by using curses.wrapper:
 '''
 
 
-class ScreenApp(object):
+class ScreenApp():
 
     def __init__(self, stdscreen):
         self.screen = stdscreen
@@ -30,7 +30,20 @@ class ScreenApp(object):
         self.screen.refresh()
         self.screen.addstr("2.) Say Goodbye\n")
         self.screen.refresh()
-        time.sleep(2)
+        #time.sleep(2)
+
+        # keep running until (q) for quit is pressed
+        while True:
+            screen_input = stdscreen.getch()
+            if screen_input == ord('q'):
+                break
+            elif screen_input == ord('2'):
+                self.screen.addstr("Goodbye!!!!!!!!!")
+                self.screen.refresh()
+                time.sleep(3)
+                break
+            else:
+                continue
 
 if __name__ == '__main__':
     curses.wrapper(ScreenApp)
