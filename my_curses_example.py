@@ -26,11 +26,11 @@ class ScreenApp(object):
         self.screen = stdscreen
         curses.curs_set(0)
 
-        self.screen.addstr("1.) Say Hello")
+        self.screen.addstr("1.) Say Hello\n")
         self.screen.refresh()
-        self.screen.addstr("2.) Say Goodbye")
+        self.screen.addstr("2.) Say Goodbye\n")
         self.screen.refresh()
-        time.sleep(5.5)
+        time.sleep(2)
 
 if __name__ == '__main__':
     curses.wrapper(ScreenApp)
