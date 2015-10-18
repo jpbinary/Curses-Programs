@@ -35,11 +35,11 @@ class ScreenApp():
 
         # keep looking for input until (q) for quit is pressed
         while True:
-            screen_input = stdscr.getch()
+            screen_input = self.screen.getch()
             if screen_input == ord('q'):
                 break
             elif screen_input == ord('2'):
-                height, width = stdscr.getmaxyx()
+                height, width = self.screen.getmaxyx()
                 new_height = (height/2) - 1
                 new_width = (width/2) - 1
                 self.screen.addstr(new_height, new_width, "Goodbye!!!!!!!!!")
